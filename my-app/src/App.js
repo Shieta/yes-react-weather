@@ -12,55 +12,30 @@ export default function App() {
           <div className="card-body">
             <Heather />
 
-            <Weather city="Munich" />
+            <Weather />
             <div className="row">
               <div className="col-2">
-                <Forecast
-                  icon="CLEAR_DAY"
-                  color="goldenrod"
-                  size="50"
-                  animate="true"
-                />
+                <Forecast icon="RAIN" color="blue" size="50" animate="true" />
               </div>
               <div className="col-2">
-                <Forecast
-                  icon="CLOUDY"
-                  color="goldenrod"
-                  size="50"
-                  animate="true"
-                />
-              </div>
-              <div className="col-2">
-                <Forecast
-                  icon="RAIN"
-                  color="goldenrod"
-                  size="50"
-                  animate="true"
-                />
-              </div>
-              <div className="col-2">
-                <Forecast
-                  icon="FOG"
-                  color="goldenrod"
-                  size="50"
-                  animate="true"
-                />
+                <Forecast icon="WIND" color="blue" size="50" animate="true" />
               </div>
               <div className="col-2">
                 <Forecast
                   icon="CLEAR_DAY"
-                  color="goldenrod"
+                  color="blue"
                   size="50"
                   animate="true"
                 />
               </div>
               <div className="col-2">
-                <Forecast
-                  icon="WIND"
-                  color="goldenrod"
-                  size="50"
-                  animate="true"
-                />
+                <Forecast icon="FOG" color="blue" size="50" animate="true" />
+              </div>
+              <div className="col-2">
+                <Forecast icon="SLEET" color="blue" size="50" animate="true" />
+              </div>
+              <div className="col-2">
+                <Forecast icon="SNOW" color="blue" size="50" animate="true" />
               </div>
             </div>
           </div>

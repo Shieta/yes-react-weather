@@ -5,16 +5,16 @@ body {
 }
 
 h1 {
-  font-family: "Indie Flower", cursive;
-  font-family: "Pacifico", cursive;
+  font-family: "Bungee Shade", cursive;
+
   color: #45171d;
-  font-size: 40px;
+  font-size: 35px;
 }
 
 h2 {
-  margin: 20px 0;
-  color: #e84a5f;
-  font-family: "Secular One", sans-serif;
+  margin: 5px 0;
+  font-size: small;
+  color: gray;
 }
 
 .temperature-today {
@@ -41,4 +41,8 @@ h2 {
 
 .input {
   border-radius: 5px;
+}
+
+.li {
+  list-style: none;
 }

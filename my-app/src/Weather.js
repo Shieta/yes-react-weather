@@ -1,13 +1,27 @@
 import React, { useState } from "react";
-import Forecast from "./Forecast";
+import axios from "axios";
 
-export default function Weather(props) {
-  let [loader, setLoader] = useState(false);
-  let [city, setCity] = useState(null);
+export default function Weather() {
+  let [city, setCity] = useState(" ");
+  let [loaded, setLoaded] = useState(false);
+  let [weather, setWeather] = useState({});
+
+  function showWeather(response) {
+    setLoaded(true);
+    setWeather({
+      temperature: response.data.main.temp,
+      wind: response.data.wind.speed,
+      humidity: response.data.main.humidity,
+      description: response.data.weather[0].description,
+      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+    });
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
-    setLoader(true);
+    let apiKey = "4eb6daa3756f86904454c49ea5eab81e";
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(url).then(showWeather);
   }
 
   function updateCity(event) {
@@ -15,51 +29,66 @@ export default function Weather(props) {
   }
 
   let form = (
-    <form onSubmit={handleSubmit}>
-      <div className="row form">
-        <div className="col-6">
-          <input
-            type="search"
-            placeholder="Enter a city here"
-            className="input form-control"
-            onChange={updateCity}
-          />
-        </div>
-        <div className="col-2">
-          <input
-            type="submit"
-            value="Select city"
-            className="submit btn btn-primary"
-          />
+    <div className="Weather">
+      <div className="container">
+        <div className="weather-app-wrapper">
+          <div className="weather-app">
+            <div className="overview">
+              <form onSubmit={handleSubmit} id="search-form" className="mb-3">
+                <div className="row search">
+                  <div className="col-sm-9">
+                    <div className="row">
+                      <div className="col-6">
+                        <input
+                          type="city"
+                          className="form-control"
+                          placeholder="Enter a city"
+                          onChange={updateCity}
+                          autofocus="0n"
+                          autocomplete="off"
+                          id="city-input"
+                        />
+                      </div>
+                      <div className="col-3">
+                        <input
+                          type="submit"
+                          value="search"
+                          className="btn btn-primary"
+                        />
+                      </div>
+                      <div className="col-3">
+                        <button className="currently-btn btn btn-success w-100">
+                          Current
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
-    </form>
+    </div>
   );
 
-  if (loader) {
+  if (loaded) {
     return (
-      <div className="weather">
+      <div>
+        {" "}
         {form}
-        <h2>
-          Today in {city} <br />
-          Tuesday 05.04.2022
-        </h2>
-        <div className="row">
-          <div className="col-6">
-            <div className="temperature-today">10°C /20°C</div>
-          </div>
-          <div className="col-2">
-            <Forecast
-              icon="CLEAR_DAY"
-              color="goldenrod"
-              size="50"
-              animate="true"
-            />
-          </div>
-        </div>
+        <ul className="li">
+          <li>Temperature: {Math.round(weather.temperature)}°C</li>
+          <li>Description: {weather.description}</li>
+          <li>Humidity: {weather.humidity}%</li>
+          <li>Wind: {weather.wind}km/h</li>
+          <li>
+            <img src={weather.icon} alt={weather.description} />
+          </li>
+        </ul>
       </div>
     );
   } else {
-    return <div>{form};</div>;
+    return form;
   }
 }
