@@ -77,6 +77,7 @@ export default function Weather() {
       <div>
         {" "}
         {form}
+        <p>Current weather in {city} :</p>
         <ul className="li">
           <li>Temperature: {Math.round(weather.temperature)}°C</li>
           <li>Description: {weather.description}</li>
